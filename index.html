@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NebulaNex</title>
+    <style>
+body {
+    font-family: 'Times New Roman', serif;
+    margin: 1;
+    padding: 0;
+    background-color: #fff;
+    color: #000;
+}
+
+header {
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    padding: 1em;
+    font-family: 'Georgia', serif;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.search-container button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+main {
+    font-family: 'Georgia';
+}
+
+.dashboard {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.blog-card {
+    background-color: #fff;
+    color: #000000;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.blog-card:hover {
+    transform: scale(1.05);
+}
+
+.blog-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Georgia', serif;
+}
+
+.blog-content {
+    font-size: 0.9em;
+    color: #555;
+    font-family: 'Verdana', Geneva, sans-serif;
+}
+
+footer {
+    background-color: #fff;
+    color: #000000;
+    text-align: center;
+    padding: 1px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Courier New', Courier, monospace;
+}
+div {
+    text-align: justify;
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>MebulaMax</h1>
+</header>
+
+    <main>
+    <div class="search-container">
+        <input type="text" placeholder="Search...">
+        <button type="submit">Search</button>
+    </div>
+        <h2>Welcome!</h2>
+
+        <p>Embark on a journey of discovery with MebulaMax Blogs, where we go beyond the headlines to uncover the most captivating and intriguing stories. We are not just another blogging platform; we are a hub of thought-provoking narratives, uncensored true backstories, and unfiltered opinions that challenge the status quo.</p>
+    </main>
+
+    <div class="dashboard" id="blogList">
+     <a href="blog1.html" class="blog-card">
+    <div class="blog-content">
+        <div class="blog-title">Why the 2023 Ballon D'or was 'Rigged'?</div>
+        <div class="blog-text">By Jubaier Kabir(Sports Journalist, Croatia)</div>
+    </div>
+</a>
+<a href="blog2.html" class="blog-card">
+    <div class="blog-content">
+        <div class="blog-title">Hello World!</div>
+        <div class="blog-text">By Matthew Freeman</div>
+    </div>
+</a>
+<a href="blog3.html" class="blog-card">
+    <div class="blog-content">
+        <div class="blog-title">The Rickroll prank</div>
+        <div class="blog-text">By Jim Truman</div>
+    </div>
+</a>
+        </div>
+
+    <footer>
+        <p>&copy; 2023 NebulaNex Blogs. All rights reserved.</p>
+    </footer>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the blog list container and input element
+        var blogList = document.getElementById('blogList');
+        var searchInput = document.querySelector('.search-container input[type="text"]');
+
+        // Store all blog cards for later filtering
+        var allBlogCards = Array.from(blogList.getElementsByClassName('blog-card'));
+
+        // Add an event listener for input changes
+        searchInput.addEventListener('input', function () {
+            var searchTerm = searchInput.value.toLowerCase();
+
+            // Filter the blog cards based on the search term
+            var filteredBlogCards = allBlogCards.filter(function (blogCard) {
+                var blogTitle = blogCard.querySelector('.blog-title').textContent.toLowerCase();
+                var blogText = blogCard.querySelector('.blog-text').textContent.toLowerCase();
+
+                return blogTitle.includes(searchTerm) || blogText.includes(searchTerm);
+            });
+
+            // Update the display of the blog cards
+            updateBlogCards(filteredBlogCards);
+        });
+
+        // Function to update the display of blog cards
+        function updateBlogCards(filteredBlogCards) {
+            blogList.innerHTML = ''; // Clear the current display
+
+            if (filteredBlogCards.length > 0) {
+                // Append the filtered blog cards to the container
+                filteredBlogCards.forEach(function (blogCard) {
+                    blogList.appendChild(blogCard.cloneNode(true));
+                });
+            } else {
+                // Display a message when no matching blogs are found
+                blogList.innerHTML = '<p>No matching blogs found.</p>';
+            }
+        }
+    });
+</script>
+
+
+</html>
